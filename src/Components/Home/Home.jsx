@@ -168,7 +168,7 @@ function Home() {
               fontSize: "1rem",
              
               flex: 1,
-              opacity: male === "" || female === "" ? 0.6 : 1,
+              opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
             }}
           >
             Reset
