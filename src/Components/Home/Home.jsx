@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import enemy from "../../gifs/enemy.gif"
-import friends from "../../gifs/friends.gif"
-import love from "../../gifs/love.gif"
-import affect from "../../gifs/affect.gif"
-import marriage from "../../gifs/marriage.gif"
-import sibling from "../../gifs/sibling.gif"
-
+import enemy from "../../gifs/enemy.gif";
+import friends from "../../gifs/friends.gif";
+import love from "../../gifs/love.gif";
+import affect from "../../gifs/affect.gif";
+import marriage from "../../gifs/marriage.gif";
+import sibling from "../../gifs/sibling.gif";
 
 function Home() {
   const [male, Setmale] = useState("");
   const [female, Setfemale] = useState("");
   const [result, Setresult] = useState("");
-
 
   const relation = ["F", "L", "A", "M", "E", "S"];
   const descriptions = {
@@ -31,11 +29,12 @@ function Home() {
     "S": sibling
   };
 
-  function Reset(){
-    Setresult("")
-    Setfemale("")
-    Setmale("")
+  function Reset() {
+    Setresult("");
+    Setfemale("");
+    Setmale("");
   }
+  
   function Burn_Letter() {
     let res = male.split("").filter((char) => !female.includes(char)).join("");
     let res2 = female.split("").filter((char) => !male.includes(char)).join("");
@@ -61,7 +60,6 @@ function Home() {
     }
     setState(value);
   }
-  
 
   return (
     <div
@@ -73,7 +71,6 @@ function Home() {
         height: "100vh",
         backgroundColor: "#1e1e2e",
         color: "white",
-       
         padding: "2rem",
         boxSizing: "border-box",
       }}
@@ -87,7 +84,7 @@ function Home() {
           color: "#ff79c6",
         }}
       >
-        FLAMES Relationship Game
+        FLAMES
       </h1>
 
       <div
@@ -136,47 +133,40 @@ function Home() {
         />
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-        <button
-  onClick={Burn_Letter}
-  disabled={male.length < 2 || female.length < 2}
-  style={{
-    padding: "0.75rem",
-    borderRadius: "5px",
-    backgroundColor: male.length < 2 || female.length < 2 ? "#6272a4" : "#ff79c6",
-    color: "white",
-    fontSize: "1rem",
-    cursor: male.length < 2 || female.length < 2 ? "not-allowed" : "pointer",
-    flex: 1,
-    opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
-  }}
->
-  Reveal Result
-</button>
-
-         
+          <button
+            onClick={Burn_Letter}
+            disabled={male.length < 2 || female.length < 2}
+            style={{
+              padding: "0.75rem",
+              borderRadius: "5px",
+              backgroundColor: male.length < 2 || female.length < 2 ? "#6272a4" : "#ff79c6",
+              color: "white",
+              fontSize: "1rem",
+              cursor: male.length < 2 || female.length < 2 ? "not-allowed" : "pointer",
+              flex: 1,
+              opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
+            }}
+          >
+            Reveal Result
+          </button>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center",}}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <button
             onClick={Reset}
-           
             style={{
               padding: "0.75rem",
               borderRadius: "5px",
               backgroundColor: "#ffffff",
               color: "Black",
               fontSize: "1rem",
-             
               flex: 1,
-              opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
+              opacity: male === "" || female === "" ? 0.6 : 1,
             }}
           >
             Reset
           </button>
-
-         
         </div>
-        
       </div>
 
       {result && (
@@ -188,7 +178,6 @@ function Home() {
             color: "#f1fa8c",
             backgroundColor: "#282a36",
             padding: "1rem",
-          
             borderRadius: "10px",
             boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.2)",
             textAlign: "center",
@@ -196,10 +185,10 @@ function Home() {
         >
           <p>{result}</p>
           <img 
-  src={gifs[result]} 
-  alt="Relationship Result" 
-  style={{ maxWidth: "100%", height: "auto", borderRadius: "10px" }} 
-/>
+            src={gifs[result]} 
+            alt="Relationship Result" 
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "10px" }} 
+          />
           <p style={{ fontSize: "1rem", marginTop: "0.5rem", color: "#bd93f9" }}>
             {descriptions[result]}
           </p>
