@@ -4,23 +4,30 @@ function Home() {
   const [male, Setmale] = useState("");
   const [female, Setfemale] = useState("");
   const [result, Setresult] = useState("");
+  const [isValidInput, setIsValidInput] = useState(true);
 
   const relation = ["F", "L", "A", "M", "E", "S"];
   const descriptions = {
-    "F": "Friendship - A strong bond that lasts forever!",
-    "L": "Love - A deep and passionate connection!",
+    "F": "Friendship - A strong and supportive bond!",
+    "L": "Love - A deep and special connection!",
     "A": "Affection - A caring and warm relationship!",
     "M": "Marriage - A lifetime of togetherness!",
-    "E": "Enemy - Rivalry and misunderstandings!",
-    "S": "Sibling - A brotherly/sisterly bond!"
+    "E": "Enemy - A challenging relationship with differences!",
+    "S": "Sister (Sibling) - A bond like family!"
   };
 
+
+  function Reset(){
+    Setresult("")
+    Setfemale("")
+    Setmale("")
+  }
   function Burn_Letter() {
     let res = male.split("").filter((char) => !female.includes(char)).join("");
     let res2 = female.split("").filter((char) => !male.includes(char)).join("");
     let resu = res.concat(res2);
 
-    if (resu.length === null || resu.length === 0) return;
+    if (resu.length === 0) return;
 
     let relationCopy = [...relation];
     let index = 0;
@@ -34,9 +41,13 @@ function Home() {
   }
 
   function handleInput(setState, value) {
-    const filteredValue = value.replace(/[^a-zA-Z]/g, "");
-    setState(filteredValue);
+    if (/[^a-zA-Z]/.test(value)) {
+      alert("Please enter only letters (A-Z or a-z).");
+      return; // Prevents updating state with invalid input
+    }
+    setState(value);
   }
+  
 
   return (
     <div
@@ -48,14 +59,15 @@ function Home() {
         height: "100vh",
         backgroundColor: "#1e1e2e",
         color: "white",
-        padding: "20px",
+        padding: "2rem",
+        boxSizing: "border-box",
       }}
     >
       <h1
         style={{
-          fontSize: "40px",
+          fontSize: "2.5rem",
           fontWeight: "bold",
-          marginBottom: "20px",
+          marginBottom: "1.5rem",
           textAlign: "center",
           color: "#ff79c6",
         }}
@@ -68,25 +80,26 @@ function Home() {
           width: "100%",
           maxWidth: "400px",
           backgroundColor: "#282a36",
-          padding: "20px",
+          padding: "1.5rem",
           borderRadius: "10px",
           boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.2)",
           display: "flex",
           flexDirection: "column",
-          gap: "15px",
+          gap: "1rem",
         }}
       >
         <input
           type="text"
           placeholder="Enter male name"
+          value={male}
           style={{
-            padding: "10px",
+            padding: "0.75rem",
             borderRadius: "5px",
             border: "1px solid #6272a4",
             backgroundColor: "#44475a",
             color: "white",
             textAlign: "center",
-            fontSize: "16px",
+            fontSize: "1rem",
           }}
           onChange={(e) => handleInput(Setmale, e.target.value)}
         />
@@ -94,40 +107,83 @@ function Home() {
         <input
           type="text"
           placeholder="Enter female name"
+          value={female}
           style={{
-            padding: "10px",
+            padding: "0.75rem",
             borderRadius: "5px",
             border: "1px solid #ff79c6",
             backgroundColor: "#44475a",
             color: "white",
             textAlign: "center",
-            fontSize: "16px",
+            fontSize: "1rem",
           }}
           onChange={(e) => handleInput(Setfemale, e.target.value)}
         />
 
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
           <button
             onClick={Burn_Letter}
             disabled={male === "" || female === ""}
             style={{
-              padding: "10px",
+              padding: "0.75rem",
               borderRadius: "5px",
               backgroundColor: male === "" || female === "" ? "#6272a4" : "#ff79c6",
               color: "white",
-              fontSize: "16px",
+              fontSize: "1rem",
               cursor: male === "" || female === "" ? "not-allowed" : "pointer",
               flex: 1,
-              marginLeft: "5px",
               opacity: male === "" || female === "" ? 0.6 : 1,
             }}
           >
             Reveal Result
           </button>
+
+         
         </div>
+
+        <div style={{ display: "flex", justifyContent: "center",}}>
+          <button
+            onClick={Reset}
+           
+            style={{
+              padding: "0.75rem",
+              borderRadius: "5px",
+              backgroundColor: "#ffffff",
+              color: "Black",
+              fontSize: "1rem",
+             
+              flex: 1,
+              opacity: male === "" || female === "" ? 0.6 : 1,
+            }}
+          >
+            Reset
+          </button>
+
+         
+        </div>
+        
       </div>
 
-    
+      {result && (
+        <div
+          style={{
+            marginTop: "1.5rem",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "#f1fa8c",
+            backgroundColor: "#282a36",
+            padding: "1rem",
+            borderRadius: "10px",
+            boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.2)",
+            textAlign: "center",
+          }}
+        >
+          <p>{result}</p>
+          <p style={{ fontSize: "1rem", marginTop: "0.5rem", color: "#bd93f9" }}>
+            {descriptions[result]}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
