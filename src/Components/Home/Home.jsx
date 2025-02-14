@@ -87,7 +87,7 @@ function Home() {
           color: "#ff79c6",
         }}
       >
-        FLAMES Relationship Game
+        FLAMES 
       </h1>
 
       <div
