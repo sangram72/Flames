@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import enemy from "../../gifs/enemy.gif"
+import friends from "../../gifs/friends.gif"
+import love from "../../gifs/love.gif"
+import affect from "../../gifs/affect.gif"
+import marriage from "../../gifs/marriage.gif"
+import sibling from "../../gifs/sibling.gif"
+
 
 function Home() {
   const [male, Setmale] = useState("");
   const [female, Setfemale] = useState("");
   const [result, Setresult] = useState("");
-  const [isValidInput, setIsValidInput] = useState(true);
+
 
   const relation = ["F", "L", "A", "M", "E", "S"];
   const descriptions = {
@@ -15,7 +22,14 @@ function Home() {
     "E": "Enemy - A challenging relationship with differences!",
     "S": "Sister (Sibling) - A bond like family!"
   };
-
+  const gifs = {
+    "F": friends,
+    "L": love,
+    "A": affect,
+    "M": marriage,
+    "E": enemy,
+    "S": sibling
+  };
 
   function Reset(){
     Setresult("")
@@ -43,7 +57,7 @@ function Home() {
   function handleInput(setState, value) {
     if (/[^a-zA-Z]/.test(value)) {
       alert("Please enter only letters (A-Z or a-z).");
-      return; // Prevents updating state with invalid input
+      return; 
     }
     setState(value);
   }
@@ -59,6 +73,7 @@ function Home() {
         height: "100vh",
         backgroundColor: "#1e1e2e",
         color: "white",
+       
         padding: "2rem",
         boxSizing: "border-box",
       }}
@@ -138,7 +153,6 @@ function Home() {
   Reveal Result
 </button>
 
-
          
         </div>
 
@@ -154,7 +168,7 @@ function Home() {
               fontSize: "1rem",
              
               flex: 1,
-              opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
+              opacity: male === "" || female === "" ? 0.6 : 1,
             }}
           >
             Reset
@@ -174,12 +188,18 @@ function Home() {
             color: "#f1fa8c",
             backgroundColor: "#282a36",
             padding: "1rem",
+          
             borderRadius: "10px",
             boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.2)",
             textAlign: "center",
           }}
         >
           <p>{result}</p>
+          <img 
+  src={gifs[result]} 
+  alt="Relationship Result" 
+  style={{ maxWidth: "100%", height: "auto", borderRadius: "10px" }} 
+/>
           <p style={{ fontSize: "1rem", marginTop: "0.5rem", color: "#bd93f9" }}>
             {descriptions[result]}
           </p>
