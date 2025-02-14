@@ -121,22 +121,23 @@ function Home() {
         />
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-          <button
-            onClick={Burn_Letter}
-            disabled={male === "" || female === ""}
-            style={{
-              padding: "0.75rem",
-              borderRadius: "5px",
-              backgroundColor: male === "" || female === "" ? "#6272a4" : "#ff79c6",
-              color: "white",
-              fontSize: "1rem",
-              cursor: male === "" || female === "" ? "not-allowed" : "pointer",
-              flex: 1,
-              opacity: male === "" || female === "" ? 0.6 : 1,
-            }}
-          >
-            Reveal Result
-          </button>
+        <button
+  onClick={Burn_Letter}
+  disabled={male.length < 2 || female.length < 2}
+  style={{
+    padding: "0.75rem",
+    borderRadius: "5px",
+    backgroundColor: male.length < 2 || female.length < 2 ? "#6272a4" : "#ff79c6",
+    color: "white",
+    fontSize: "1rem",
+    cursor: male.length < 2 || female.length < 2 ? "not-allowed" : "pointer",
+    flex: 1,
+    opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
+  }}
+>
+  Reveal Result
+</button>
+
 
          
         </div>
@@ -153,7 +154,7 @@ function Home() {
               fontSize: "1rem",
              
               flex: 1,
-              opacity: male === "" || female === "" ? 0.6 : 1,
+              opacity: male.length < 2 || female.length < 2 ? 0.6 : 1,
             }}
           >
             Reset
